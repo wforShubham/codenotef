@@ -1,0 +1,82 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Dark Mode Styling */
+/* Dark Mode Styling */
+.dark-mode {
+  background-color: #121212 !important;
+  color: white !important;
+}
+
+/* Card Styling */
+.dark-mode .card {
+  background-color: #1e1e1e !important;
+  border-color: #444 !important;
+}
+
+/* Ensure text visibility inside cards */
+.dark-mode .card-title, 
+.dark-mode .card-text {
+  color: white !important;
+}
+
+/* Ensure placeholder is visible in dark mode */
+input::placeholder {
+  color: #bbb !important; /* Light gray */
+  opacity: 1; /* Fully visible */
+}
+
+/* Specifically target the dark mode */
+.dark-mode input::placeholder {
+  color: #ddd !important; /* Brighter gray */
+}
+
+/* Ensure placeholder is visible in dark mode */
+input::placeholder {
+  color: #bbb !important; /* Light gray */
+  opacity: 1; /* Fully visible */
+}
+
+
+/* Dark mode styles */
+.dark-mode {
+  background-color: #121212 !important;
+  color: #fff !important;
+}
+
