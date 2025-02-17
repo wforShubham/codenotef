@@ -129,7 +129,12 @@ const Paste = ({ darkMode }) => {
                       <div className="d-flex gap-2 flex-wrap">
                         <button
                           className="btn btn-outline-primary btn-sm"
-                          onClick={() => navigate("/updatenote", { state: { note } })}
+                          onClick={() => {
+                            localStorage.removeItem("noteTitle");
+                            localStorage.removeItem("noteDescription");
+                            localStorage.removeItem("noteTag");
+                            navigate("/updatenote", { state: { note } });
+                          }}
                         >
                           <PencilLine size={16} />
                         </button>
