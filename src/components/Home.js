@@ -53,6 +53,9 @@ const HomePage = ({ darkMode }) => {
     }
 
     if (title === "Add New Code") {
+      localStorage.removeItem("noteTitle");
+      localStorage.removeItem("noteDescription");
+      localStorage.removeItem("noteTag");
       navigate("/addnote");
     } else if (title === "Your Code" || title === "Share Code") {
       navigate("/codes");
