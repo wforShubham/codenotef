@@ -27,12 +27,35 @@ const AddNote = ({ darkMode }) => {
   const [outputColor, setOutputColor] = useState("text-success");
 
   useEffect(() => {
+    const savedTitle = localStorage.getItem("noteTitle");
+    const savedValue = localStorage.getItem("noteDescription");
+    const savedTag = localStorage.getItem("noteTag");
+  
     if (existingNote) {
-      setTitle(existingNote.title);
-      setValue(existingNote.description);
-      setTag(existingNote.tag);
+      setTitle(savedTitle || existingNote.title);
+      setValue(savedValue || existingNote.description);
+      setTag(savedTag || existingNote.tag);
+    } else {
+      if (savedTitle) setTitle(savedTitle);
+      if (savedValue) setValue(savedValue);
+      if (savedTag) setTag(savedTag);
     }
   }, [existingNote]);
+  
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+    localStorage.setItem("noteTitle", e.target.value);
+  };
+  
+  const handleDescriptionChange = (val) => {
+    setValue(val);
+    localStorage.setItem("noteDescription", val);
+  };
+  
+  const handleTagChange = (e) => {
+    setTag(e.target.value);
+    localStorage.setItem("noteTag", e.target.value);
+  };
 
   const handleSubmit = () => {
     if (existingNote) {
@@ -179,7 +202,7 @@ const AddNote = ({ darkMode }) => {
               disabled={readonly}
               placeholder="Title"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={handleTitleChange}
               className={`form-control rounded-4 flex-grow-1 ${
                 darkMode ? "dark-mode" : ""
               }`}
@@ -257,7 +280,7 @@ const AddNote = ({ darkMode }) => {
                 maxHeight="600px"
                 extensions={[javascript()]}
                 theme={dracula}
-                onChange={(val) => setValue(val)}
+                onChange={handleDescriptionChange}
                 editable={!readonly}
                 className="rounded-4 code-editor"
               />
@@ -268,7 +291,7 @@ const AddNote = ({ darkMode }) => {
                   disabled={readonly}
                   placeholder="Tag"
                   value={tag}
-                  onChange={(e) => setTag(e.target.value)}
+                  onChange={handleTagChange}
                   className={`form-control rounded-4 ${
                     darkMode ? "dark-mode" : ""
                   }`}
