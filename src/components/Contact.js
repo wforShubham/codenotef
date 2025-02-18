@@ -106,7 +106,7 @@ const Contact = ({ darkMode }) => {
                 placeholder="Your Message"
                 onChange={onChange}
                 value={formData.message}
-                className={`form-control rounded-4 ${
+                className={`form-control rounded-4 minlength="10" required ${
                   darkMode
                     ? "bg-dark text-light border-secondary placeholder-light"
                     : ""
