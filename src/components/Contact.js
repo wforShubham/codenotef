@@ -12,6 +12,10 @@ const Contact = ({ darkMode }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.message.length < 10) {
+      toast.error("Message must be at least 10 characters long.");
+      return;
+    }
     setLoading(true); // Start loading
 
     const response = await fetch("https://codenoteb.onrender.com/api/contact/submit", {
