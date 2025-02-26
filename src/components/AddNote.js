@@ -33,7 +33,7 @@ const AddNote = ({ darkMode }) => {
       const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
         headers: {
-          Authorization: `Bearer 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`,
+          Authorization: `Bearer ${process.env.REACT_APP_OPENROUTER_KEY}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
