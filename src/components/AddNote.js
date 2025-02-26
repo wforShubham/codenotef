@@ -19,12 +19,40 @@ const AddNote = ({ darkMode }) => {
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
+  const [complexity, setComplexity] = useState("Complexity analysis will appear here...");
+
 
   // Compiler-related states
   const [language, setLanguage] = useState("javascript");
   const [stdin, setStdin] = useState(""); // User input for test cases
   const [output, setOutput] = useState("Output...");
   const [outputColor, setOutputColor] = useState("text-success");
+
+  const analyzeComplexity = async (code) => {
+    try {
+      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer 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`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "google/gemini-2.0-pro-exp-02-05:free",
+          messages: [
+            {
+              role: "user",
+              content: `Analyze the following code and provide only time complexity and space complexity in format: Space Complexity: (value) and then next line then Time Complexity: (value):\n\n${code}`,
+            },
+          ],
+        }),
+      });
+
+      const data = await response.json();
+      setComplexity(data.choices[0].message.content);
+    } catch (error) {
+      setComplexity("Error analyzing complexity");
+    }
+  };
 
   useEffect(() => {
     const savedTitle = localStorage.getItem("noteTitle");
@@ -56,6 +84,7 @@ const AddNote = ({ darkMode }) => {
     setTag(e.target.value);
     localStorage.setItem("noteTag", e.target.value);
   };
+  
 
   const handleSubmit = () => {
     if (existingNote) {
@@ -67,7 +96,13 @@ const AddNote = ({ darkMode }) => {
       toast.success("Note Added Successfully");
       resetForm();
     }
+  
+    // Clear localStorage after submission
+    localStorage.removeItem("noteTitle");
+    localStorage.removeItem("noteDescription");
+    localStorage.removeItem("noteTag");
   };
+  
 
   const resetForm = () => {
     setTitle("");
@@ -120,6 +155,7 @@ const AddNote = ({ darkMode }) => {
   const handleCompile = async () => {
     setOutput("Compiling...");
     setOutputColor("text-secondary");
+    setComplexity("Analyzing complexity...");
 
     const decodeBase64 = (str) => {
       try {
@@ -178,6 +214,8 @@ const AddNote = ({ darkMode }) => {
       setOutputColor("text-danger");
       toast.error("Error during compilation");
     }
+
+    analyzeComplexity(value);
   };
 
   // Function to map language names to Judge0 language IDs
@@ -280,6 +318,7 @@ const AddNote = ({ darkMode }) => {
                 maxHeight="600px"
                 extensions={[javascript()]}
                 theme={dracula}
+                // onChange={(val) => setValue(val)}
                 onChange={handleDescriptionChange}
                 editable={!readonly}
                 className="rounded-4 code-editor"
@@ -304,7 +343,7 @@ const AddNote = ({ darkMode }) => {
         {/* Compiler Section */}
         <div className="row justify-content-center">
         <div className="col-12 col-md-10 mt-4 border rounded-4">
-          <div className={'d-flex gap-2 mt-3 ${darkMode ? "dark-mode" : ""} '}>
+          <div className={`d-flex gap-2 mt-3 ${darkMode ? "dark-mode" : ""} `}>
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
@@ -348,6 +387,12 @@ const AddNote = ({ darkMode }) => {
           />
         </div>
         </div>
+        <div className="row justify-content-center">
+        <div className="col-12 col-md-10 mt-3 border rounded-4 p-3">
+          <h5>Time & Space Complexity Analysis:</h5>
+          <p>{complexity}</p>
+        </div>
+      </div>
       </div>
     </div>
   );
