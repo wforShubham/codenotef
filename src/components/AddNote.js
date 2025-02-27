@@ -28,27 +28,19 @@ const AddNote = ({ darkMode }) => {
   const [output, setOutput] = useState("Output...");
   const [outputColor, setOutputColor] = useState("text-success");
 
-  const analyzeComplexity = async (code) => {
+    const analyzeComplexity = async (code) => {
     try {
-      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      const response = await fetch("https://codenoteb.onrender.com/api/analyze-complexity", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_OPENROUTER_KEY}`,
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // Optional for authentication
         },
-        body: JSON.stringify({
-          model: "google/gemini-2.0-pro-exp-02-05:free",
-          messages: [
-            {
-              role: "user",
-              content: `Analyze the following code and provide only time complexity and space complexity in format: Space Complexity: (value) and then next line then Time Complexity: (value):\n\n${code}`,
-            },
-          ],
-        }),
+        body: JSON.stringify({ code }),
       });
-
+  
       const data = await response.json();
-      setComplexity(data.choices[0].message.content);
+      setComplexity(data.complexity);
     } catch (error) {
       setComplexity("Error analyzing complexity");
     }
