@@ -40,6 +40,7 @@ const AddNote = ({ darkMode }) => {
       });
   
       const data = await response.json();
+      console.log(data)
       setComplexity(data.complexity);
     } catch (error) {
       setComplexity("Error analyzing complexity");
