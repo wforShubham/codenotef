@@ -30,7 +30,7 @@ const AddNote = ({ darkMode }) => {
 
     const analyzeComplexity = async (code) => {
     try {
-      const response = await fetch("https://codenoteb.onrender.com/api/analyze-complexity", {
+      const response = await fetch("https://codenoteb.onrender.com/analyze-complexity", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
