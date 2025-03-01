@@ -16,6 +16,8 @@ import Admin from "./components/Admin";
 import ForgetPassword from "./components/ForgetPassword";
 import ResetPassword from "./components/ResetPassword";
 import VerificationPage from "./components/VerificationPage";
+import EditorPage from "./components/EditorPage";
+import Chome from "./components/Chome";
 
 
 
@@ -60,6 +62,8 @@ function App() {
             <Route exact path="/forget-password" element={<ForgetPassword darkMode={darkMode} />} />
             <Route exact path="/reset-password/:id/:token" element={<ResetPassword darkMode={darkMode} />} />
             <Route exact path="/verify-email/:token" element={<VerificationPage darkMode={darkMode} />} />
+            <Route exact path="/editor/:roomId" element={<EditorPage darkMode={darkMode} />} />
+            <Route exact path="/chome" element={<Chome darkMode={darkMode} />} />
           </Routes>
         </div>
       </Router>
