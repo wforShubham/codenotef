@@ -1,6 +1,6 @@
 import { io } from "socket.io-client"; // ✅ Import io
 
-const SERVER_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+const SERVER_URL = "https://codenoteb.onrender.com";
 
 export const initSocket = async () => {
     return io(SERVER_URL, {
