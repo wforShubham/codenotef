@@ -85,6 +85,11 @@ const Navbar = ({ darkMode, setDarkMode, isAuthenticated, setIsAuthenticated }) 
               </Link>
             </li>
             <li className="nav-item">
+              <Link className={`nav-link ${location.pathname === "/chome" ? "active" : ""}`} to="/chome">
+                CodeTogether
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link className={`nav-link ${location.pathname === "/about" ? "active" : ""}`} to="/about">
                 About
               </Link>
