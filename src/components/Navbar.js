@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import codelogo from "./nlogo-removebg-preview.png";
+import codelogo from "./cnlg.png";
 import toast from "react-hot-toast";
 import { BsSun, BsMoon } from "react-icons/bs";
 
