@@ -58,7 +58,7 @@ const Navbar = ({ darkMode, setDarkMode, isAuthenticated, setIsAuthenticated }) 
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          <img src={codelogo} width={250} height={50} alt="CodeNote Logo" />
+          <img src={codelogo} width={280} height={50} alt="CodeNote Logo" />
         </Link>
         <button
           className="navbar-toggler"
