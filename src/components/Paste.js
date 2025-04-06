@@ -94,7 +94,7 @@ const Paste = ({ darkMode }) => {
 
       <div className={`card rounded-4 ${darkMode ? "bg-dark text-light border-secondary" : ""}`}>
         <div className="card-header d-flex justify-content-between">
-          <h2 className={`h4 ${darkMode ? "text-light" : "text-dark"}`}>All Codes</h2>
+          <h2 className={`h4 ${darkMode ? "text-light" : "text-dark"}`}><span style={{ color: 'lightgreen' }}>&lt;/&gt;</span> Codes</h2>
           <div className="d-flex gap-2 mt-3 mx-1">
             <div className="rounded-circle bg-danger" style={{ width: "12px", height: "12px" }}></div>
             <div className="rounded-circle bg-warning" style={{ width: "12px", height: "12px" }}></div>
@@ -116,6 +116,7 @@ const Paste = ({ darkMode }) => {
                     <div className="card-body d-flex justify-content-between align-items-start">
                       <div>
                         <h5 className={`card-title ${darkMode ? "text-light" : "text-dark"}`}>
+                          <span style={{ color: 'lightgreen' }}>&lt;/&gt;</span>
                           {note.title}
                         </h5>
                         {/* <p className={`card-text ${darkMode ? "text-light" : "text-dark"}`}>
